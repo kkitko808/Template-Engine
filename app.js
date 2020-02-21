@@ -35,12 +35,22 @@ inquirer
         let empEmail = response.email;
         let empTitle = response.title;
 
-        fs.readFile("templates/employee.html", 'utf8', (err, data) => {
+        fs.readFile("templates/engineer.html", 'utf8', (err, data) => {
             if (err) throw err;
-            data = data.replace("{name}", empName)
-            data = data.replace("{id}", empId)
-            data = data.replace("{email}", empEmail)
-            data = data.replace("{title}", empTitle)
+            data = data.replace("{ name }", empName)
+            data = data.replace("{ id }", empId)
+            data = data.replace("{ email }", empEmail)
+            data = data.replace("{ title }", empTitle)
+            let userTemplate = data;
+            fs.readFile("output/index.html", 'utf8', (err, data) => {
+                if (err) throw err;
+                data = data.replace("{{teammember0}}", userTemplate)
+                fs.writeFile("output/changed.html", data, "utf8", (err) => {
+                    if (err) throw err;
+                    console.log("output has been updated!")
+                })
+            })
+        }
 
-        })
+        )
     });
