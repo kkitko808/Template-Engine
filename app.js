@@ -35,14 +35,14 @@ inquirer
         let empEmail = response.email;
         let empTitle = response.title;
 
-        fs.readFile("templates/engineer.html", 'utf8', (err, data) => {
+        fs.readFile("./templates/engineer.html", 'utf8', (err, data) => {
             if (err) throw err;
             data = data.replace("{ name }", empName)
             data = data.replace("{ id }", empId)
             data = data.replace("{ email }", empEmail)
             data = data.replace("{ title }", empTitle)
             let userTemplate = data;
-            fs.readFile("output/index.html", 'utf8', (err, data) => {
+            fs.readFile("./output/index.html", 'utf8', (err, data) => {
                 if (err) throw err;
                 data = data.replace("{{teammember0}}", userTemplate)
                 fs.writeFile("output/changed.html", data, "utf8", (err) => {
